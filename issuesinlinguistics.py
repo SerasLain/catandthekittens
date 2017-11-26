@@ -26,11 +26,11 @@ for i in range (2015,2016):
     for readmore in readmores:
         readmores_list.append(requests.get(readmore["href"]))
         time.sleep(0.5)
-    os.mkdir("atricles{0}".format(i))
+    os.mkdir("articles{0}".format(i))
     for j, readmore in enumerate(readmores_list):
         download = BeautifulSoup(readmore.text, "lxml").find(class_="elastic-button download")
         pdf = requests.get(download["href"])
         print("Writing text{0}...".format(j))
-        with open('atricles{0}\issuesinlinguistics{1}-{2}.pdf'.format(i,i,j), 'wb') as f:
+        with open('articles{0}\issuesinlinguistics{1}-{2}.pdf'.format(i,i,j), 'wb') as f:
             f.write(pdf.content)
         time.sleep(0.5)
