@@ -9,7 +9,7 @@ for i in range(16,18):
     #os.mkdir('spbu_law_articles_20{}'.format(i))
     #os.mkdir('spbu_law_articles_20{}_meta'.format(i))
     year = str(i)
-    r = requests.get('http://vestnik.spbu.ru/html{}/s14/s14v4/s14v4.html'.format(year, str(v)))
+    r = requests.get('http://vestnik.spbu.ru/html{}/s14/s14v4/s14v4.html'.format(year))
     r.encoding='utf-8'
     soup = BeautifulSoup(r.text, 'lxml')
     p = re.compile('[а-яА-ЯёЁ]')
