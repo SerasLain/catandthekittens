@@ -41,12 +41,17 @@ def clean_text(text):
     text = re.sub('\n+( )*[0-9]+( )*\n+', '', text)
     text = remove_begining(text)
     text = remove_ending(text)
-    text = re.sub('[^а-яА-ЯёЁ!.?,:\s\n;-]+',' ', text)# убрать всякие формулы
-    text = re.sub('\W\s\W+',' ',text) #штуки в духе - . . . - . ., . . , , . . . . .,
+    text = re.sub('[^а-яА-ЯёЁ!.?,:\s\n;-]+', ' ', text)  # убрать всякие формулы
+    text = re.sub('\.\s\.+', '.',
+                  text)  # нельзя совсем выкидывать последовательности точек, т.к. MaltParser не умеет разбирать
+    # длинные последовательности без точек
+    text = re.sub(',\s,+', ',', text)
+    text = re.sub('\W\s\W{3,}', '.', text)  # штуки в духе - . . . - . ., . . , , . . . . .,
     text = text.replace('ЭКОНОМИЧЕСКИЙ ЖУРНАЛ ВШЭ', ' ')
-    text = text.replace('Экономический журнал ВШ', ' ')
     text = text.replace('Экономический журнал ВШЭ', ' ')
-    text = re.sub('\s+',' ', text)
+    text = text.replace('Экономический журнал ВШ', ' ')
+
+    text = re.sub('\s+', ' ', text)
 
     text = re.sub('(\w\s){3,}', ' ', text)
     text_to_count = re.sub('^[а-яА-ЯЁёA-Za-z-\s]', ' ', text)
@@ -109,13 +114,13 @@ if __name__ == '__main__':
     cleaned = 'cleaned'
     if cleaned not in os.listdir(os.getcwd()):
         os.mkdir(cleaned)
-    res_dir = cleaned+'/'+journal
-    if journal not in os.listdir(os.getcwd()+'/'+cleaned):
-        os.mkdir(cleaned+'/'+journal)
+    res_dir = cleaned + '/' + journal
+    if journal not in os.listdir(os.getcwd() + '/' + cleaned):
+        os.mkdir(cleaned + '/' + journal)
     total_count = 0
     for i, file in enumerate(os.listdir(target_dir)):
-        with open("cleaned/{0}/{1}_{2}_{3}.txt".format(journal,file, year, i), 'w', encoding='utf-8') as f:
-            text, count = document_to_text(target_dir+'/'+file)
+        with open("cleaned/{0}/{1}_{2}.txt".format(journal, year, i), 'w', encoding='utf-8') as f:
+            text, count = document_to_text(target_dir + '/' + file)
             f.write(text)
             print(i, count)
             total_count += count
