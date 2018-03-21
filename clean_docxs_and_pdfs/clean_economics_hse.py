@@ -44,6 +44,8 @@ def clean_text(text):
     text = re.sub('[^а-яА-ЯёЁ!.?,:\s\n;-]+',' ', text)# убрать всякие формулы
     text = re.sub('\W\s\W+',' ',text) #штуки в духе - . . . - . ., . . , , . . . . .,
     text = text.replace('ЭКОНОМИЧЕСКИЙ ЖУРНАЛ ВШЭ', ' ')
+    text = text.replace('Экономический журнал ВШ', ' ')
+    text = text.replace('Экономический журнал ВШЭ', ' ')
     text = re.sub('\s+',' ', text)
 
     text = re.sub('(\w\s){3,}', ' ', text)
