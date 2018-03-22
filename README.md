@@ -11,3 +11,4 @@
 | Politology  | 374904 |
 | Law         | 413165 |
 | Psychology  | 480851 |
+| Economics   | 455448 |
