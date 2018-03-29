@@ -83,13 +83,13 @@ class Example(QWidget):
         btn.clicked.connect(self.handleButton1)
 
         btn1 = QPushButton('Search by author', self)
-        btn1.resize(btn.sizeHint())
-        btn1.move(120,0)
+        btn1.resize(btn1.sizeHint())
+        btn1.move(140,0)
         btn1.clicked.connect(self.handleButton2)
 
         btn2 = QPushButton('Search by tag', self)
-        btn2.resize(btn.sizeHint())
-        btn2.move(240, 0)
+        btn2.resize(btn2.sizeHint())
+        btn2.move(280, 0)
         btn2.clicked.connect(self.handleButton3)
 
         self.setGeometry(300, 300, 400, 400)
