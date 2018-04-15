@@ -1,19 +1,11 @@
 import pandas as pd
-
-new_df = pd.read_csv('suggestions.csv')
-
 from pymystem3 import Mystem
-
-m = Mystem()
-
 from gensim.models import Word2Vec
-
 import operator
-
-model = Word2Vec.load('Models/LinguisticModel')
 
 
 def suggest(input_string, collocations, model):
+    m = Mystem()
     c_max = max(collocations.pmi)
     suggestions = {}
     w1 = input_string.split()[0]
@@ -91,8 +83,9 @@ def suggest(input_string, collocations, model):
         return sorted(suggestions.items(), key=operator.itemgetter(1))
 
 
-print(suggest('автор думает', new_df, model))
-
-print(suggest('автор котик', new_df, model))
-
-print(suggest('котик предлагает', new_df, model))
+if __name__ == '__main__':
+    new_df = pd.read_csv('suggestions.csv')
+    model = Word2Vec.load('Models/LinguisticModel')
+    print(suggest('автор думает', new_df, model))
+    print(suggest('автор котик', new_df, model))
+    print(suggest('котик предлагает', new_df, model))
