@@ -4,3 +4,4 @@ cleaned/
 metas_and_pdfs/
 *.zip
 marked/
+__pycache__/
