@@ -1,6 +1,8 @@
 from collections import defaultdict
 from gensim.models import Word2Vec
-
+from tqdm import tqdm
+import logging
+from alphabet_detector import AlphabetDetector
 
 class Searcher:
     def __init__(self):
@@ -50,3 +52,36 @@ class Searcher:
                         self.found['coordinate_NPs'].append(pair + [i, model.similarity(pair[0], pair[1])])
                     else:
                         self.found['coordinate_NPs'].append(pair + [i, float('-inf')])
+
+    def not_in_vocabulary(self,tree):
+        logging.basicConfig(level=logging.INFO)
+        logging.info("Loading Word2Vec model")
+        model = Word2Vec.load('../collocation_frequences/Models/LinguisticModel')
+        ad = AlphabetDetector()
+        for i,x in enumerate(tqdm(tree)):
+            if x['form'].isalpha() and ad.only_alphabet_chars(x['form'], "CYRILLIC") and x['form'].lower() not in model.wv.vocab:
+                self.found['not in vocabulary'].append((x['form'],i))
+
+    def i_vs_we(self, tree, file):
+        flag = ''
+        self.found['i vs we']=dict()
+        self.found['i vs we'][file]=[]
+        for x in tree:
+            for i, word in enumerate(x):
+                if word['lemma']=='Я' and not flag:
+                    flag ='i'
+                    self.found['i vs we'][file].append((word['form'], i))
+                elif (word['lemma']=='Я' and flag=='we') or (word['lemma']=='МЫ' and flag=='i'):
+                    self.found['i vs we'][file].append((word['form'], i))
+                elif word['lemma']=='МЫ' and not flag:
+                    flag ='we'
+                    self.found['i vs we'][file].append((word['form'], i))
+
+
+
+
+
+
+
+
+
