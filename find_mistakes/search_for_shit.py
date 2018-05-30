@@ -3,10 +3,15 @@ from gensim.models import Word2Vec
 from tqdm import tqdm
 import logging
 from alphabet_detector import AlphabetDetector
+import pandas as pd
 
 class Searcher:
     def __init__(self):
         self.found = defaultdict(list)
+
+    def conll_to_df(self, file):
+        df = pd.read_csv(file, sep='\t')
+        return df
 
     def find_genitives(self, tree, file, threshold):
         gen_chain = []
@@ -76,6 +81,17 @@ class Searcher:
                 elif word['lemma']=='МЫ' and not flag:
                     flag ='we'
                     self.found['i vs we'][file].append((word['form'], i))
+
+    def check_mood(self,tree):
+        for x in tree:
+            for i, word in enumerate(x):
+                if word['form'] == 'бы':
+                    self.found['subjunctive mood'].append(i)
+                if 'imper' in word['feats']:
+                    self.found['imperative mood'].append(i)
+
+
+
 
 
 
