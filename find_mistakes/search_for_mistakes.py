@@ -7,7 +7,7 @@ import json
 SENTENCE_LENGTHS_THRESHOLDS = 'sentence_length_thresholds.json'
 MORE_LESS = ['более', 'менее']
 STATISTICS = "maxs"
-MODEL = '../collocation_frequences/Models/LinguisticModel'
+MODEL = '../collocation_frequencies/Models/LinguisticModel'
 def load_from_json(file):
     with open(file, 'r', encoding='utf-8') as f:
         return json.load(f)
