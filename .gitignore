@@ -5,3 +5,5 @@ metas_and_pdfs/
 *.zip
 marked/
 __pycache__/
+env
+*.csv
