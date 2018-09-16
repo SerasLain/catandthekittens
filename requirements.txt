@@ -4,3 +4,15 @@ alphabet_detector
 pymysql==0.9.2
 mysql
 pandas==0.23.4
+scikit-learn==0.19.2
+pymystem3
+nltk
+keras
+numpy
+conllu
+datrie
+docx2txt
+pdfminer.six
+requests
+bs4
+PyQt5
