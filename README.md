@@ -2,6 +2,9 @@
 Проект "Русский академический корпус" в НИУ ВШЭ  
 ТЗ проекта: https://github.com/MariaFjodorowa/catandthekittens/blob/master/pdfs/ТЗ.pdf
 
+### Распределение ролей и план работы над фронтендом:  
+https://docs.google.com/document/d/1UOUEx0RRw2pjESQ6lXImlI660PVVEAUFUti2NF_TDEs/edit?usp=sharing
+
 1. presentations - все связанные с проектом презентации
 2. pdfs - всё, что текст и не презентации, например, требования к оформлению. Необязательно только pdf.
 3. pdfs/articles - статьи по теме и другие справочные материалы  
