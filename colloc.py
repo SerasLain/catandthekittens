@@ -17,7 +17,6 @@ def filter_by_tsc(path):
 
 
 def count_567(domain_path):
-    # Just script to get ngrams from the corpus
     unigrams = read_ngrams(os.path.join(domain_path, '1.csv'))
     corpus_size = sum([int(i) for i in unigrams.values()])
 
@@ -40,7 +39,6 @@ def count_567(domain_path):
 
 
 def count_ngram(domain_path, ngram_raw, ngram_scored, n1grams, unigrams, corpus_size):
-    # One more script to count all metrics for 5,6,7-grams
     if type(n1grams) is str:
         n1grams = read_ngrams(os.path.join(domain_path, n1grams))
     else:
@@ -269,7 +267,7 @@ def get_rank(ngrams_set, path):
                                str(summarytscpmi), str(summarylogdpmi)]) + '\n')
 
 
-# These two functions added into the previous one
+# These two functions should be add into the previous one!
 
 def logD_ranked(logDice_ranking, logD, pmi_rank):
     """
