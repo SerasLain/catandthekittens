@@ -1,8 +1,8 @@
 import mysql.connector
 import os
+from k import USER, PASS
 
-
-cnx = mysql.connector.connect(user='user', password='KMnO4',
+cnx = mysql.connector.connect(user=USER, password=PASS,
                               host='127.0.0.1',
                               database='cat')
 
